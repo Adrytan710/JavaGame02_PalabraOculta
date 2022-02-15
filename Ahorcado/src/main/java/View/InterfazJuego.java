@@ -8,6 +8,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import Objetos.Ahorcado;
+
 import java.awt.FlowLayout;
 
 import javax.swing.border.EmptyBorder;
@@ -29,8 +32,12 @@ public class InterfazJuego extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, menu, palabra, vidas, palabra_secreta, botones, imagenes;
 	private JButton[] array = new JButton[27];
+	private JTextField textPalabra;
+	private JLabel pistas = new JLabel(), colgao = new JLabel();
 	
-	public JButton inicio;
+	private Ahorcado juego;
+	
+	private JButton inicio;
 	
 	public InterfazJuego() 
 	{
@@ -57,7 +64,7 @@ public class InterfazJuego extends JFrame {
 				JOptionPane.showInputDialog("La palabra es: ");
 			}
 		});
-		JTextField textPalabra = new JTextField();
+		textPalabra = new JTextField();
 		
 		menu.setBounds(10, 10, 378, 161);
 		menu.setLayout(null);
@@ -72,6 +79,7 @@ public class InterfazJuego extends JFrame {
 		palabra.setLayout(null);
 		vidas.setBounds(10, 11, 358, 64);
 		vidas.setBorder(new EmptyBorder(0, 0, 0, 0));
+		vidas.add(pistas);
 		palabra.add(vidas);
 		palabra_secreta.setBounds(10, 114, 358, 64);
 		palabra_secreta.setLayout(null);
@@ -87,22 +95,22 @@ public class InterfazJuego extends JFrame {
 		
 		botones.setBounds(10, 382, 378, 168);
 		botones.setBorder(new TitledBorder(null, "Teclado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		botones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		addBotones();
 		
 		imagenes.setBounds(398, 10, 326, 540);
+		imagenes.setBorder(new EmptyBorder(0, 0, 0, 0));
 		imagenes.setBorder(new LineBorder(new Color(0, 0, 0)));
-		//imagenes.add(new JLabel(new ImageIcon(new ImageIcon("../intento1.png").getImage().getScaledInstance(315, 530, Image.SCALE_SMOOTH))));
-		vidas.add(new JLabel(new ImageIcon(new ImageIcon("../pista5.png").getImage().getScaledInstance(350, 55, Image.SCALE_SMOOTH))));
+		imagenes.add(colgao);
 
 		contentPane.add(menu);
 		contentPane.add(palabra);
 		contentPane.add(botones);
-		botones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		contentPane.add(imagenes);
 	}
 	
-	public void addBotones()
+	private void addBotones()
 	{
 		int aux = 0;
 		for (int i = 0; i < array.length; i++) 
@@ -116,15 +124,46 @@ public class InterfazJuego extends JFrame {
 			{
 				array[i] = new JButton("Ñ");
 			}
+			
+			array[i].setEnabled(false);
 
 			array[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(ActionEvent e) 
+				{
 					JButton btn = (JButton)e.getSource();
 					btn.setEnabled(false);
+					
+					colgao.setIcon(new ImageIcon(new ImageIcon("../intento"+juego.getIntents()+".png").getImage().getScaledInstance(310, 525, Image.SCALE_SMOOTH)));
 				}
 			});
 			
 			botones.add(array[i]);
 		}
+	}
+	
+	public void iniciarJuego()
+	{
+		System.out.println(juego.getPalabraSecreta());
+		textPalabra.setText(juego.getPalabraSecretaMostrar());
+		
+		pistas.setIcon(new ImageIcon(new ImageIcon("../pista5.png").getImage().getScaledInstance(350, 55, Image.SCALE_SMOOTH)));
+		colgao.setIcon(null);
+		
+		for (int i = 0; i < array.length; i++) 
+		{
+			array[i].setEnabled(true);
+		}
+	}
+
+	public Ahorcado getJuego() {
+		return juego;
+	}
+
+	public void setJuego(Ahorcado juego) {
+		this.juego = juego;
+	}
+
+	public JButton getInicio() {
+		return inicio;
 	}
 }

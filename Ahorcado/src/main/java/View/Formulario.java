@@ -20,11 +20,15 @@ public class Formulario extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	public JButton btn;
+	private JRadioButton facil, normal, dificil;
+	private JComboBox<Object> comboBox;
+	private JButton btn;
+	
 
 	public Formulario() 
 	{
 		setResizable(false);
+		setTitle("Ahorcado");
 		setBounds(500, 300, 550, 400);
 		setVisible(true);
 
@@ -35,12 +39,12 @@ public class Formulario extends JFrame {
 		JLabel dificultad = new JLabel("Dificultad");
 		dificultad.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
-		JRadioButton facil = new JRadioButton("Facil", true);
-		JRadioButton normal = new JRadioButton("Normal");
-		JRadioButton dificil = new JRadioButton("Dificil");
+		facil = new JRadioButton("Facil", true);
+		normal = new JRadioButton("Normal");
+		dificil = new JRadioButton("Dificil");
 		JLabel categoria = new JLabel("Categoria");
 		categoria.setFont(new Font("Tahoma", Font.BOLD, 11));
-		JComboBox<Object> comboBox = new JComboBox<Object>();
+		comboBox = new JComboBox<Object>();
 		ButtonGroup grupo = new ButtonGroup();
 		btn = new JButton("Enviar");
 		
@@ -48,13 +52,13 @@ public class Formulario extends JFrame {
 		grupo.add(normal);
 		grupo.add(dificil);
 		
-		dificultad.setBounds(56, 108, 69, 15);
-		facil.setBounds(100, 133, 109, 23);
-		normal.setBounds(100, 159, 109, 23);
-		dificil.setBounds(100, 185, 109, 23);
-		categoria.setBounds(298, 108, 69, 14);
-		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"Superheroes", "Misterio", "Deportes", "Literatura"}));
-		comboBox.setBounds(326, 133, 109, 22);
+		dificultad.setBounds(53, 56, 69, 15);
+		facil.setBounds(115, 78, 109, 23);
+		normal.setBounds(115, 104, 109, 23);
+		dificil.setBounds(115, 130, 109, 23);
+		categoria.setBounds(249, 56, 69, 14);
+		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"Superhéroes", "Misterio", "Deportes", "Literatura"}));
+		comboBox.setBounds(313, 78, 109, 22);
 		btn.setBounds(199, 263, 109, 22);
 		
 		contentPane.add(dificultad);
@@ -64,6 +68,51 @@ public class Formulario extends JFrame {
 		contentPane.add(categoria);
 		contentPane.add(comboBox);
 		contentPane.add(btn);
+	}
+
+
+	public JRadioButton getFacil() {
+		return facil;
+	}
+
+
+	public void setFacil(JRadioButton facil) {
+		this.facil = facil;
+	}
+
+
+	public JRadioButton getNormal() {
+		return normal;
+	}
+
+
+	public void setNormal(JRadioButton normal) {
+		this.normal = normal;
+	}
+
+
+	public JRadioButton getDificil() {
+		return dificil;
+	}
+
+
+	public void setDificil(JRadioButton dificil) {
+		this.dificil = dificil;
+	}
+
+
+	public JComboBox<Object> getComboBox() {
+		return comboBox;
+	}
+
+
+	public void setComboBox(JComboBox<Object> comboBox) {
+		this.comboBox = comboBox;
+	}
+
+
+	public JButton getBtn() {
+		return btn;
 	}
 
 }

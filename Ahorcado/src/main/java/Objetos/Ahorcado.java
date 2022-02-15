@@ -2,116 +2,146 @@ package Objetos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Ahorcado 
 {
-	private List <String> palabras;
+	private ArrayList<String> palabras;
 	private int lifeNumber = 5;
-	private String eleccion = "";
 	private String palabraSecreta;
+	private String palabraSecretaMostrar;
 	private boolean canPlay;
-	private int intents;
+	private int intents = 0;
+	private int intentsMax;
 	private int contador;
 	private char letra;
-	private String [] tematica = {"Superhéroes", "Misterio", "Deportes", "Literatura"};;
 	
-	//DEFECTO
-	public Ahorcado() {
-		this.eleccion = "";
-		this.canPlay = false;
-		this.intents = 0;
-		this.contador = 0;
-	}
-	
-	public Ahorcado(int intents, String opcion) {
-		this.intents = intents;
-		this.eleccion = opcion;
-	}
-	
-
-	public int getLifeNumber() {
-		return intents;
+	public Ahorcado(int intents, String opcion) 
+	{
+		this.intentsMax = intents;
+		setPalabras(opcion);
+		setPalabraSecreta();
+		setPalabraSecretaMostrar();
 	}
 
-	public void setLifeNumber(int lifeNumber) {
-		this.intents = lifeNumber;
+	public int getContador() 
+	{
+		return contador;
 	}
 
-	public String getEleccion() {
-		return eleccion;
+	public void setContador(int contador) 
+	{
+		this.contador = contador;
 	}
 
-	public void setEleccion(String eleccion) {
-		for(int i = 0; i < tematica.length; i++) {
-			if(eleccion.equals(tematica[i])) {
-				this.eleccion = eleccion;
-			}
-		}
+	public int getLifeNumber() 
+	{
+		return lifeNumber;
+	}
+
+	public void setLifeNumber(int lifeNumber) 
+	{
+		this.lifeNumber = lifeNumber;
 	}
 	
-	public char getLetra() {
+	public char getLetra() 
+	{
 		return letra;
 	}
 
-	public void setLetra(char letra) {
+	public void setLetra(char letra) 
+	{
 		this.letra = letra;
 	}
 	
-	public List<String> getPalabras() {
+	public ArrayList<String> getPalabras() 
+	{
 		return palabras;
 	}
 
-	public void setPalabras()  
+	public void setPalabras(String opcion)  
 	{
-		switch(this.eleccion) {
+		switch(opcion) 
+		{
 			case "Superhéroes":
-				List <String> superheroes = new ArrayList<String>(Arrays.asList("ironman","spiderman","hulk","superman","batman","aquaman","supergirl","flash","starlord","groot"));
-				this.palabras = new ArrayList<String>(superheroes);
+				this.palabras = new ArrayList<String>(Arrays.asList("ironman","spiderman","hulk","superman","batman","aquaman","supergirl","flash","starlord","groot"));
 				break;
 			case "Misterio":
-				List <String> misterio = new ArrayList<String>(Arrays.asList("agatha","allan","conan","john","dashiel","edogawa","raymond","josephine","truman","juan"));
-				this.palabras = new ArrayList<String>(misterio);
+				this.palabras = new ArrayList<String>(Arrays.asList("agatha","allan","conan","john","dashiel","edogawa","raymond","josephine","truman","juan"));
 				break;
 			case "Deportes":
-				List <String> deportes = new ArrayList<String>(Arrays.asList("futbol","tenis","baloncesto","badminton","volleyball","ciclismo","hockey","balomano","natacion","motociclismo"));
-				this.palabras = new ArrayList<String>(deportes);
+				this.palabras = new ArrayList<String>(Arrays.asList("futbol","tenis","baloncesto","badminton","volleyball","ciclismo","hockey","balomano","natacion","motociclismo"));
 				break;
 			case "Literatura":
-				List <String> literatura = new ArrayList<String>(Arrays.asList("aventuras","terror","misterio","policiaca","cuento","humor","romantica","poesia","teatro","mitologia"));
-				this.palabras = new ArrayList<String>(literatura);
+				this.palabras = new ArrayList<String>(Arrays.asList("aventuras","terror","misterio","policiaca","cuento","humor","romantica","poesia","teatro","mitologia"));
 				break;
 		}
 	}
 	
-	public String getPalabraSecreta() {
+	public String getPalabraSecreta() 
+	{
 		return palabraSecreta;
 	}
 
-	public void setPalabra() {
+	public void setPalabraSecreta() 
+	{
 		int numero = (int) (Math.random() * palabras.size());
 		
-		palabraSecreta = palabras.get(numero);	
+		palabraSecreta = palabras.get(numero).toUpperCase();
 	}
 	
-	public boolean weCanPlay() {
-		if(intents > 0) {
+	public boolean weCanPlay() 
+	{
+		if(intentsMax > intents) 
+		{
 			canPlay = true;
 		}	
 		return canPlay;
 	}
 	
-	public void Adivina(char letra) {
-		if(weCanPlay()) {
-			for(int i = 0; i < palabraSecreta.length(); i++) {
-				if(palabraSecreta.charAt(i) == letra) {
+	public void Adivina(char letra) 
+	{
+		if(weCanPlay()) 
+		{
+			for(int i = 0; i < palabraSecreta.length(); i++) 
+			{
+				if(palabraSecreta.charAt(i) == letra) 
+				{
 					System.out.println(letra);
 					System.out.println("acierto");
-				} else {
 					contador++;
-					intents--;
+				} 
+				else 
+				{
+					contador++;
+					intents++;
 				}
 			}
 		}
+	}
+
+	public int getIntents() {
+		return intents;
+	}
+
+	public String getPalabraSecretaMostrar() 
+	{
+		String str = "";
+		
+		for (int i = 0; i < palabraSecretaMostrar.length(); i++) 
+		{
+			str += palabraSecretaMostrar.charAt(i) + " ";
+		}
+		return str;
+	}
+
+	public void setPalabraSecretaMostrar() 
+	{
+		String str = "";
+		
+		for (int i = 0; i < palabraSecreta.length(); i++) 
+		{
+			str += "_";
+		}
+		this.palabraSecretaMostrar = str;
 	}
 }
