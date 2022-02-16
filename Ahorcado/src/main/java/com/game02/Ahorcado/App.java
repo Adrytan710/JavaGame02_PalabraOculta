@@ -77,6 +77,16 @@ public class App
 							
 						}
 					});
+
+					interfaz.getNewGame().addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) 
+						{
+							
+							form.setVisible(true);
+							interfaz.setVisible(false);
+							
+						}
+					});
 				} 
 				catch (Exception e) 
 				{

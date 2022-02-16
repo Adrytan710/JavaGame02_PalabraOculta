@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 
+import javax.swing.JButton;
+
 public class Ahorcado 
 {
 	private ArrayList<String> palabras;
@@ -21,12 +23,9 @@ public class Ahorcado
 		setPalabras(opcion);
 		setPalabraSecreta();
 		setPalabraSecretaMostrar();
-		imagenes.put(10, new String[]{"../intento1.png", "../intento2.png", "../intento3.png", "../intento4.png", "../intento5.png",
-									  "../intento6.png", "../intento7.png", "../intento8.png", "../intento9.png", "../intento10.png"});
-		imagenes.put(8, new String[]{"../intento3.png", "../intento4.png", "../intento5.png", "../intento6.png",
-									 "../intento7.png", "../intento8.png", "../intento9.png", "../intento10.png"});
-		imagenes.put(6, new String[]{"../intento5.png", "../intento6.png", "../intento7.png",
-									 "../intento8.png", "../intento9.png", "../intento10.png"});
+		imagenes.put(10, new String[]{"","../intento1.png", "../intento2.png", "../intento3.png", "../intento4.png", "../intento5.png", "../intento6.png", "../intento7.png", "../intento8.png", "../intento9.png", "../intento10.png"});
+		imagenes.put(8, new String[]{"","../intento3.png", "../intento4.png", "../intento5.png", "../intento6.png", "../intento7.png", "../intento8.png", "../intento9.png", "../intento10.png"});
+		imagenes.put(6, new String[]{"","../intento5.png", "../intento6.png", "../intento7.png", "../intento8.png", "../intento9.png", "../intento10.png"});
 	}
 
 	public int getContador() 
@@ -160,6 +159,48 @@ public class Ahorcado
 		else
 		{
 			intents++;
+		}
+	}
+
+	public String[] getImagenes() 
+	{
+		return imagenes.get((Integer)intentsMax);
+	}
+
+	public void ejecutarPista(JButton[] array) 
+	{
+		lifeNumber--;
+		boolean pistaValida;
+		char letra;
+		do 
+		{
+			pistaValida = true;
+			letra = palabraSecreta.charAt((int)(Math.random()*palabraSecreta.length()));
+			
+			for (int i = 0; i < palabraSecretaMostrar.length && pistaValida; i++) 
+			{
+				if(palabraSecretaMostrar[i] == letra)
+				{
+					pistaValida = false;
+				}
+			}
+		}
+		while(!pistaValida);
+		
+		for(int i = 0; i < palabraSecreta.length(); i++) 
+		{
+			if(palabraSecreta.charAt(i) == letra) 
+			{
+				palabraSecretaMostrar[i] = letra;
+			} 
+		}
+		
+		for (int i = 0; i < array.length; i++) 
+		{
+			if(array[i].getText().charAt(0) == letra) 
+			{
+				array[i].setEnabled(false);
+			} 
 		}
 	}
 }

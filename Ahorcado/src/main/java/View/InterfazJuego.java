@@ -4,6 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -37,18 +40,43 @@ public class InterfazJuego extends JFrame {
 	
 	private Ahorcado juego;
 	
-	private JButton inicio, resolver;
+	private JButton inicio, resolver, pista;
+	
+	private JMenuItem newGame, numIntentos;
 	
 	public InterfazJuego() 
 	{
 		setResizable(false);
 		setTitle("Ahorcado");
-		setBounds(400, 200, 750, 600);
+		setBounds(400, 200, 750, 610);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JMenuBar barraMenu = new JMenuBar();
+        setJMenuBar(barraMenu);
+		JMenu menuArchivo = new JMenu("Archivo");
+		barraMenu.add(menuArchivo);
+		
+		newGame = new JMenuItem("Nuevo juego");
+		menuArchivo.add(newGame);
+		
+		JMenuItem salir = new JMenuItem("Salir");
+		menuArchivo.add(salir);
+		salir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				System.exit(0);
+				
+			}
+		});
+		
+		numIntentos = new JMenuItem("Intentos: 0");
+		menuArchivo.add(numIntentos);
 		
 		menu = new JPanel();
 		palabra = new JPanel();
@@ -57,6 +85,30 @@ public class InterfazJuego extends JFrame {
 		imagenes = new JPanel();
 		palabra_secreta = new JPanel();
 		inicio = new JButton("Iniciar juego");
+		pista = new JButton("Pista!");
+		pista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				if(JOptionPane.showConfirmDialog(contentPane, "Estas seguro de perder una pista? (pistas restantes " + juego.getLifeNumber() + ")") == 0)
+				{
+					juego.ejecutarPista(array);
+					textPalabra.setText(juego.getPalabraSecretaMostrar());
+
+					if(juego.getLifeNumber() != 0)
+					{
+						pistas.setIcon(new ImageIcon(new ImageIcon("../pista"+juego.getLifeNumber()+".png").getImage().getScaledInstance(350, 55, Image.SCALE_SMOOTH)));
+					}
+					else
+					{
+						pistas.setIcon(new ImageIcon(new ImageIcon("../sinpistas.png").getImage().getScaledInstance(350, 55, Image.SCALE_SMOOTH)));
+						pista.setEnabled(false);
+					}
+
+					
+					fin();
+				}
+			}
+		});
 		
 		resolver = new JButton("Resolver");
 		resolver.addActionListener(new ActionListener() {
@@ -64,7 +116,7 @@ public class InterfazJuego extends JFrame {
 				juego.intentoResolver(JOptionPane.showInputDialog("La palabra es: "));
 				textPalabra.setText(juego.getPalabraSecretaMostrar());
 
-				colgao.setIcon(new ImageIcon(new ImageIcon("../intento"+juego.getIntents()+".png").getImage().getScaledInstance(310, 525, Image.SCALE_SMOOTH)));
+				colgao.setIcon(new ImageIcon(new ImageIcon(juego.getImagenes()[juego.getIntents()]).getImage().getScaledInstance(310, 525, Image.SCALE_SMOOTH)));
 				fin();
 			}
 		});
@@ -84,6 +136,8 @@ public class InterfazJuego extends JFrame {
 		vidas.setBounds(10, 11, 358, 64);
 		vidas.setBorder(new EmptyBorder(0, 0, 0, 0));
 		vidas.add(pistas);
+		pista.setBounds(137, 80, 105, 23);
+		palabra.add(pista);
 		palabra.add(vidas);
 		palabra_secreta.setBounds(10, 114, 358, 64);
 		palabra_secreta.setLayout(null);
@@ -141,7 +195,7 @@ public class InterfazJuego extends JFrame {
 					{
 						textPalabra.setText(juego.getPalabraSecretaMostrar());
 					}
-					colgao.setIcon(new ImageIcon(new ImageIcon("../intento"+juego.getIntents()+".png").getImage().getScaledInstance(310, 525, Image.SCALE_SMOOTH)));
+					colgao.setIcon(new ImageIcon(new ImageIcon(juego.getImagenes()[juego.getIntents()]).getImage().getScaledInstance(310, 525, Image.SCALE_SMOOTH)));
 					
 					fin();
 				}
@@ -153,9 +207,9 @@ public class InterfazJuego extends JFrame {
 	
 	public void iniciarJuego()
 	{
-		System.out.println(juego.getPalabraSecreta());
 		textPalabra.setText(juego.getPalabraSecretaMostrar());
 		resolver.setEnabled(true);
+		pista.setEnabled(true);
 		
 		pistas.setIcon(new ImageIcon(new ImageIcon("../pista5.png").getImage().getScaledInstance(350, 55, Image.SCALE_SMOOTH)));
 		colgao.setIcon(null);
@@ -180,6 +234,7 @@ public class InterfazJuego extends JFrame {
 
 	private void fin() 
 	{
+		numIntentos.setText("Intentos: " + juego.getIntents());
 		if(juego.palabraSecretaDesvelada())
 		{
 			JOptionPane.showMessageDialog(null, "Has ganado!!");
@@ -195,9 +250,14 @@ public class InterfazJuego extends JFrame {
 	private void deshabilitarBotones() 
 	{
 		resolver.setEnabled(false);
+		pista.setEnabled(false);
 		for (int i = 0; i < array.length; i++) 
 		{
 			array[i].setEnabled(false);
 		}
+	}
+
+	public JMenuItem getNewGame() {
+		return newGame;
 	}
 }
