@@ -2,18 +2,18 @@ package Objetos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Hashtable;
 
 public class Ahorcado 
 {
 	private ArrayList<String> palabras;
 	private int lifeNumber = 5;
 	private String palabraSecreta;
-	private String palabraSecretaMostrar;
-	private boolean canPlay;
+	private char[] palabraSecretaMostrar;
 	private int intents = 0;
 	private int intentsMax;
 	private int contador;
-	private char letra;
+	private Hashtable<Integer, String[]> imagenes = new Hashtable<Integer, String[]>();
 	
 	public Ahorcado(int intents, String opcion) 
 	{
@@ -21,6 +21,9 @@ public class Ahorcado
 		setPalabras(opcion);
 		setPalabraSecreta();
 		setPalabraSecretaMostrar();
+		imagenes.put(10, new String[]{});
+		imagenes.put(8, new String[]{});
+		imagenes.put(6, new String[]{});
 	}
 
 	public int getContador() 
@@ -36,21 +39,6 @@ public class Ahorcado
 	public int getLifeNumber() 
 	{
 		return lifeNumber;
-	}
-
-	public void setLifeNumber(int lifeNumber) 
-	{
-		this.lifeNumber = lifeNumber;
-	}
-	
-	public char getLetra() 
-	{
-		return letra;
-	}
-
-	public void setLetra(char letra) 
-	{
-		this.letra = letra;
 	}
 	
 	public ArrayList<String> getPalabras() 
@@ -88,36 +76,6 @@ public class Ahorcado
 		
 		palabraSecreta = palabras.get(numero).toUpperCase();
 	}
-	
-	public boolean weCanPlay() 
-	{
-		if(intentsMax > intents) 
-		{
-			canPlay = true;
-		}	
-		return canPlay;
-	}
-	
-	public void Adivina(char letra) 
-	{
-		if(weCanPlay()) 
-		{
-			for(int i = 0; i < palabraSecreta.length(); i++) 
-			{
-				if(palabraSecreta.charAt(i) == letra) 
-				{
-					System.out.println(letra);
-					System.out.println("acierto");
-					contador++;
-				} 
-				else 
-				{
-					contador++;
-					intents++;
-				}
-			}
-		}
-	}
 
 	public int getIntents() {
 		return intents;
@@ -127,21 +85,78 @@ public class Ahorcado
 	{
 		String str = "";
 		
-		for (int i = 0; i < palabraSecretaMostrar.length(); i++) 
+		for (int i = 0; i < palabraSecretaMostrar.length; i++) 
 		{
-			str += palabraSecretaMostrar.charAt(i) + " ";
+			str += palabraSecretaMostrar[i] + " ";
 		}
 		return str;
 	}
 
 	public void setPalabraSecretaMostrar() 
 	{
-		String str = "";
+		char[] str = new char[palabraSecreta.length()];
 		
 		for (int i = 0; i < palabraSecreta.length(); i++) 
 		{
-			str += "_";
+			str[i] = '_';
 		}
 		this.palabraSecretaMostrar = str;
+	}
+
+	public int getIntentsMax() 
+	{
+		return intentsMax;
+	}
+
+	public boolean estaLetra(char letra) 
+	{
+		boolean letraEsta = false;
+		
+		for(int i = 0; i < palabraSecreta.length(); i++) 
+		{
+			if(palabraSecreta.charAt(i) == letra) 
+			{
+				palabraSecretaMostrar[i] = letra;
+				letraEsta = true;
+			} 
+		}
+		
+		contador++;
+		
+		if(!letraEsta)
+		{
+			intents++;
+		}
+		
+		return letraEsta;
+	}
+
+	public boolean palabraSecretaDesvelada() 
+	{
+		boolean guiones = true;
+		for (int i = 0; i < palabraSecretaMostrar.length && guiones; i++) 
+		{
+			if(palabraSecretaMostrar[i] == '_')
+			{
+				guiones = false;
+			}
+		}
+		
+		return guiones;
+	}
+
+	public void intentoResolver(String showInputDialog) 
+	{
+		if(showInputDialog.equalsIgnoreCase(palabraSecreta))
+		{
+			for (int i = 0; i < palabraSecretaMostrar.length; i++) 
+			{
+				palabraSecretaMostrar[i] = palabraSecreta.charAt(i);
+			}
+		}
+		else
+		{
+			intents++;
+		}
 	}
 }

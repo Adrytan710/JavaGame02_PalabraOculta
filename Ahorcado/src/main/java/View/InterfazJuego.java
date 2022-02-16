@@ -37,7 +37,7 @@ public class InterfazJuego extends JFrame {
 	
 	private Ahorcado juego;
 	
-	private JButton inicio;
+	private JButton inicio, resolver;
 	
 	public InterfazJuego() 
 	{
@@ -58,10 +58,14 @@ public class InterfazJuego extends JFrame {
 		palabra_secreta = new JPanel();
 		inicio = new JButton("Iniciar juego");
 		
-		JButton resolver = new JButton("Resolver");
+		resolver = new JButton("Resolver");
 		resolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showInputDialog("La palabra es: ");
+				juego.intentoResolver(JOptionPane.showInputDialog("La palabra es: "));
+				textPalabra.setText(juego.getPalabraSecretaMostrar());
+
+				colgao.setIcon(new ImageIcon(new ImageIcon("../intento"+juego.getIntents()+".png").getImage().getScaledInstance(310, 525, Image.SCALE_SMOOTH)));
+				fin();
 			}
 		});
 		textPalabra = new JTextField();
@@ -133,7 +137,13 @@ public class InterfazJuego extends JFrame {
 					JButton btn = (JButton)e.getSource();
 					btn.setEnabled(false);
 					
+					if(juego.estaLetra(btn.getText().charAt(0)))
+					{
+						textPalabra.setText(juego.getPalabraSecretaMostrar());
+					}
 					colgao.setIcon(new ImageIcon(new ImageIcon("../intento"+juego.getIntents()+".png").getImage().getScaledInstance(310, 525, Image.SCALE_SMOOTH)));
+					
+					fin();
 				}
 			});
 			
@@ -145,6 +155,7 @@ public class InterfazJuego extends JFrame {
 	{
 		System.out.println(juego.getPalabraSecreta());
 		textPalabra.setText(juego.getPalabraSecretaMostrar());
+		resolver.setEnabled(true);
 		
 		pistas.setIcon(new ImageIcon(new ImageIcon("../pista5.png").getImage().getScaledInstance(350, 55, Image.SCALE_SMOOTH)));
 		colgao.setIcon(null);
@@ -165,5 +176,28 @@ public class InterfazJuego extends JFrame {
 
 	public JButton getInicio() {
 		return inicio;
+	}
+
+	private void fin() 
+	{
+		if(juego.palabraSecretaDesvelada())
+		{
+			JOptionPane.showMessageDialog(null, "Has ganado!!");
+			deshabilitarBotones();
+		}
+		else if(juego.getIntents() == juego.getIntentsMax())
+		{
+			JOptionPane.showMessageDialog(null, "Has perdido!!");
+			deshabilitarBotones();
+		}
+	}
+
+	private void deshabilitarBotones() 
+	{
+		resolver.setEnabled(false);
+		for (int i = 0; i < array.length; i++) 
+		{
+			array[i].setEnabled(false);
+		}
 	}
 }
