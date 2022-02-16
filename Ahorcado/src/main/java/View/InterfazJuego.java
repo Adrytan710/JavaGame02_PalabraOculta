@@ -42,13 +42,13 @@ public class InterfazJuego extends JFrame {
 	
 	private JButton inicio, resolver, pista;
 	
-	private JMenuItem newGame, numIntentos;
+	private JMenuItem newGame, numIntentos, addDoc;
 	
 	public InterfazJuego() 
 	{
 		setResizable(false);
 		setTitle("Ahorcado");
-		setBounds(400, 200, 750, 610);
+		setBounds(410, 200, 750, 610);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		contentPane = new JPanel();
@@ -59,9 +59,36 @@ public class InterfazJuego extends JFrame {
         setJMenuBar(barraMenu);
 		JMenu menuArchivo = new JMenu("Archivo");
 		barraMenu.add(menuArchivo);
+		JMenu ayuda = new JMenu("Ayuda");
+		barraMenu.add(ayuda);
+		JMenuItem comoJugar = new JMenuItem("Como jugar");
+		ayuda.add(comoJugar);
+		JMenuItem acercaDe = new JMenuItem("Acerca de");
+		ayuda.add(acercaDe);
+		
+		comoJugar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				JOptionPane.showMessageDialog(null, "Tienes 5 pistas.\nPulsando las teclas de abajo indicas la letra que quieres, si fallas cuenta como error si aciertas se muestra la letra.\nEn todo momento tienes el boton resolver si sabes la palabra.");
+			}
+		});
+		
+		acercaDe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				JOptionPane.showMessageDialog(null, "Aplicacion desarrollada por los alumnos:\nAdrián Rodriguez\nIsabel Calzadilla\nJoan Rofes");
+			}
+		});
 		
 		newGame = new JMenuItem("Nuevo juego");
 		menuArchivo.add(newGame);
+		
+		addDoc = new JMenuItem("Añadir Palabras");
+		menuArchivo.add(addDoc);
 		
 		JMenuItem salir = new JMenuItem("Salir");
 		menuArchivo.add(salir);
@@ -259,5 +286,9 @@ public class InterfazJuego extends JFrame {
 
 	public JMenuItem getNewGame() {
 		return newGame;
+	}
+
+	public JMenuItem getAddDoc() {
+		return addDoc;
 	}
 }

@@ -1,7 +1,6 @@
 package Objetos;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Hashtable;
 
 import javax.swing.JButton;
@@ -9,6 +8,7 @@ import javax.swing.JButton;
 public class Ahorcado 
 {
 	private ArrayList<String> palabras;
+	private Hashtable<String, ArrayList<String>> palabrasDoc = new Hashtable<String, ArrayList<String>>();
 	private int lifeNumber = 5;
 	private String palabraSecreta;
 	private char[] palabraSecretaMostrar;
@@ -17,8 +17,9 @@ public class Ahorcado
 	private int contador;
 	private Hashtable<Integer, String[]> imagenes = new Hashtable<Integer, String[]>();
 	
-	public Ahorcado(int intents, String opcion) 
+	public Ahorcado(int intents, String opcion, Hashtable<String, ArrayList<String>> palabrasDoc) 
 	{
+		this.palabrasDoc = palabrasDoc;
 		this.intentsMax = intents;
 		setPalabras(opcion);
 		setPalabraSecreta();
@@ -50,21 +51,7 @@ public class Ahorcado
 
 	public void setPalabras(String opcion)  
 	{
-		switch(opcion) 
-		{
-			case "Superhéroes":
-				this.palabras = new ArrayList<String>(Arrays.asList("ironman","spiderman","hulk","superman","batman","aquaman","supergirl","flash","starlord","groot"));
-				break;
-			case "Misterio":
-				this.palabras = new ArrayList<String>(Arrays.asList("agatha","allan","conan","john","dashiel","edogawa","raymond","josephine","truman","juan"));
-				break;
-			case "Deportes":
-				this.palabras = new ArrayList<String>(Arrays.asList("futbol","tenis","baloncesto","badminton","volleyball","ciclismo","hockey","balomano","natacion","motociclismo"));
-				break;
-			case "Literatura":
-				this.palabras = new ArrayList<String>(Arrays.asList("aventuras","terror","misterio","policiaca","cuento","humor","romantica","poesia","teatro","mitologia"));
-				break;
-		}
+		this.palabras = palabrasDoc.get(opcion);
 	}
 	
 	public String getPalabraSecreta() 
@@ -202,5 +189,9 @@ public class Ahorcado
 				array[i].setEnabled(false);
 			} 
 		}
+	}
+
+	public Hashtable<String, ArrayList<String>> getPalabrasDoc() {
+		return palabrasDoc;
 	}
 }
