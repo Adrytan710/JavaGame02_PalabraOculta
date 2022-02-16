@@ -78,22 +78,22 @@ Grupo 6: Adrián - Isabel - Joan.
                             Capturas Proyecto.
                             
                             
-                            ![image](https://user-images.githubusercontent.com/36207623/154261065-6d0424b9-34b3-4a56-ba0f-207268b8269e.png)
+   ![image](https://user-images.githubusercontent.com/36207623/154261065-6d0424b9-34b3-4a56-ba0f-207268b8269e.png)
                             
                             Inicio del Juego
                             
-                            ![image](https://user-images.githubusercontent.com/36207623/154261174-a5d08205-e526-44d7-a989-2d854cf0b282.png)
+   ![image](https://user-images.githubusercontent.com/36207623/154261174-a5d08205-e526-44d7-a989-2d854cf0b282.png)
 
 
                               Panel del Juego
                               
                               
-                              ![image](https://user-images.githubusercontent.com/36207623/154261307-ba024b8c-bab3-464c-bee0-21294a9aa303.png)
+   ![image](https://user-images.githubusercontent.com/36207623/154261307-ba024b8c-bab3-464c-bee0-21294a9aa303.png)
                               
                               Desarrollo del Juego
                               
                               
-                              ![image](https://user-images.githubusercontent.com/36207623/154261379-f5fb1cba-eb2a-4205-b012-aa35c508487f.png)
+  ![image](https://user-images.githubusercontent.com/36207623/154261379-f5fb1cba-eb2a-4205-b012-aa35c508487f.png)
                               
                               Gestión de Diccionario.
 
