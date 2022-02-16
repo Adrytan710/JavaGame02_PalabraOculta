@@ -14,6 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class InsertarPalabras extends JFrame {
+	
+	//Atributos
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, panelLista, insertarDatos;
 
@@ -22,6 +25,8 @@ public class InsertarPalabras extends JFrame {
 	private JTextField textField;
 	private JButton volver;
 	private JComboBox<Object> select;
+	
+	//Constructor
 	
 	public InsertarPalabras() 
 	{
@@ -48,8 +53,12 @@ public class InsertarPalabras extends JFrame {
 		insertarDatos.add(volver);
 	}
 	
+	//Método que muestra lo que hay dentro del docker y sobrescribe lo que el usuario introduzca
+	
 	public void mostrarDocker(Hashtable<String, ArrayList<String>> docker)
 	{
+		//Printa el docker
+		
 		docker.forEach((categoria, lista) -> {
 			
 			str = "";
@@ -62,13 +71,15 @@ public class InsertarPalabras extends JFrame {
 			panelLista.add(categ);
 		});
 		
-
+		//Interfaz para interactuar con el usuario
 
 		JLabel categ = new JLabel("Categoria: ");
 		select = new JComboBox<Object>();
 		JLabel texto = new JLabel("Palabra a añadir: ");
 		textField = new JTextField();
 		JButton addBtn = new JButton("Añadir");
+		
+		//Listener para actualizar el docker
 		
 		addBtn.addActionListener(new ActionListener() {
 			
@@ -96,9 +107,13 @@ public class InsertarPalabras extends JFrame {
 			}
 		});
 		
+		//Foreach para añadir categorias
+		
 		docker.forEach((categoria, lista) -> {
 			categorys.add(categoria);
 		});
+		
+		//Inserción de datos
 		
 		select.setModel(new DefaultComboBoxModel<Object>(categorys.toArray()));
 		
@@ -116,6 +131,8 @@ public class InsertarPalabras extends JFrame {
 		insertarDatos.add(addBtn);
 	}
 
+	//Getter de JButton
+	
 	public JButton getVolver() {
 		return volver;
 	}

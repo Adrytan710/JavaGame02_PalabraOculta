@@ -32,6 +32,8 @@ import java.awt.event.ActionEvent;
  */
 public class InterfazJuego extends JFrame {
 
+	//Atributos
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, menu, palabra, vidas, palabra_secreta, botones, imagenes;
 	private JButton[] array = new JButton[27];
@@ -44,6 +46,8 @@ public class InterfazJuego extends JFrame {
 	
 	private JMenuItem newGame, numIntentos, addDoc;
 	
+	//Constructor
+	
 	public InterfazJuego() 
 	{
 		setResizable(false);
@@ -54,6 +58,8 @@ public class InterfazJuego extends JFrame {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		//Barra de menú
 		
 		JMenuBar barraMenu = new JMenuBar();
         setJMenuBar(barraMenu);
@@ -66,6 +72,8 @@ public class InterfazJuego extends JFrame {
 		JMenuItem acercaDe = new JMenuItem("Acerca de");
 		ayuda.add(acercaDe);
 		
+		//Listener de como jugar
+		
 		comoJugar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -74,6 +82,8 @@ public class InterfazJuego extends JFrame {
 				JOptionPane.showMessageDialog(null, "Tienes 5 pistas.\nPulsando las teclas de abajo indicas la letra que quieres, si fallas cuenta como error si aciertas se muestra la letra.\nEn todo momento tienes el boton resolver si sabes la palabra.");
 			}
 		});
+		
+		//Listener de acerca de
 		
 		acercaDe.addActionListener(new ActionListener() {
 			
@@ -84,6 +94,8 @@ public class InterfazJuego extends JFrame {
 			}
 		});
 		
+		//Barra de menú
+		
 		newGame = new JMenuItem("Nuevo juego");
 		menuArchivo.add(newGame);
 		
@@ -92,6 +104,9 @@ public class InterfazJuego extends JFrame {
 		
 		JMenuItem salir = new JMenuItem("Salir");
 		menuArchivo.add(salir);
+		
+		//Listener para cerrar la aplicación
+		
 		salir.addActionListener(new ActionListener() {
 			
 			@Override
@@ -101,6 +116,8 @@ public class InterfazJuego extends JFrame {
 				
 			}
 		});
+		
+		//Menú que recuenta el número de intentos
 		
 		numIntentos = new JMenuItem("Intentos: 0");
 		menuArchivo.add(numIntentos);
@@ -113,6 +130,9 @@ public class InterfazJuego extends JFrame {
 		palabra_secreta = new JPanel();
 		inicio = new JButton("Iniciar juego");
 		pista = new JButton("Pista!");
+		
+		//Listener confirmación de pista y ejecución de esta misma
+		
 		pista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -138,6 +158,9 @@ public class InterfazJuego extends JFrame {
 		});
 		
 		resolver = new JButton("Resolver");
+		
+		//Listener para resolver la palabra secreta
+		
 		resolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				juego.intentoResolver(JOptionPane.showInputDialog("La palabra es: "));
@@ -195,6 +218,8 @@ public class InterfazJuego extends JFrame {
 		contentPane.add(imagenes);
 	}
 	
+	//Método para añadir los botones del teclado
+	
 	private void addBotones()
 	{
 		int aux = 0;
@@ -212,6 +237,8 @@ public class InterfazJuego extends JFrame {
 			
 			array[i].setEnabled(false);
 
+			//Listener de jugada
+			
 			array[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) 
 				{
@@ -232,6 +259,8 @@ public class InterfazJuego extends JFrame {
 		}
 	}
 	
+	//Método para iniciar el juego con variables default
+	
 	public void iniciarJuego()
 	{
 		textPalabra.setText(juego.getPalabraSecretaMostrar());
@@ -247,6 +276,8 @@ public class InterfazJuego extends JFrame {
 		}
 	}
 
+	//Getters y Setters
+	
 	public Ahorcado getJuego() {
 		return juego;
 	}
@@ -259,6 +290,16 @@ public class InterfazJuego extends JFrame {
 		return inicio;
 	}
 
+	public JMenuItem getNewGame() {
+		return newGame;
+	}
+
+	public JMenuItem getAddDoc() {
+		return addDoc;
+	}
+
+	//Método para si se finaliza el juego
+	
 	private void fin() 
 	{
 		numIntentos.setText("Intentos: " + juego.getIntents());
@@ -273,6 +314,8 @@ public class InterfazJuego extends JFrame {
 			deshabilitarBotones();
 		}
 	}
+	
+	//Método para deshabilitar los botones que no puedes volver a usar
 
 	private void deshabilitarBotones() 
 	{
@@ -282,13 +325,5 @@ public class InterfazJuego extends JFrame {
 		{
 			array[i].setEnabled(false);
 		}
-	}
-
-	public JMenuItem getNewGame() {
-		return newGame;
-	}
-
-	public JMenuItem getAddDoc() {
-		return addDoc;
 	}
 }

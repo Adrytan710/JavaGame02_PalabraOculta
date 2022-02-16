@@ -7,6 +7,9 @@ import javax.swing.JButton;
 
 public class Ahorcado 
 {
+	
+	//Atributos
+	
 	private ArrayList<String> palabras;
 	private Hashtable<String, ArrayList<String>> palabrasDoc = new Hashtable<String, ArrayList<String>>();
 	private int lifeNumber = 5;
@@ -16,6 +19,8 @@ public class Ahorcado
 	private int intentsMax;
 	private int contador;
 	private Hashtable<Integer, String[]> imagenes = new Hashtable<Integer, String[]>();
+	
+	//Constructor
 	
 	public Ahorcado(int intents, String opcion, Hashtable<String, ArrayList<String>> palabrasDoc) 
 	{
@@ -29,6 +34,8 @@ public class Ahorcado
 		imagenes.put(6, new String[]{"","../intento5.png", "../intento6.png", "../intento7.png", "../intento8.png", "../intento9.png", "../intento10.png"});
 	}
 
+	//Getters y Setters
+	
 	public int getContador() 
 	{
 		return contador;
@@ -65,6 +72,11 @@ public class Ahorcado
 		
 		palabraSecreta = palabras.get(numero).toUpperCase();
 	}
+	
+	public String[] getImagenes() 
+	{
+		return imagenes.get((Integer)intentsMax);
+	}
 
 	public int getIntents() {
 		return intents;
@@ -92,11 +104,17 @@ public class Ahorcado
 		this.palabraSecretaMostrar = str;
 	}
 
+	public Hashtable<String, ArrayList<String>> getPalabrasDoc() {
+		return palabrasDoc;
+	}
+
 	public int getIntentsMax() 
 	{
 		return intentsMax;
 	}
 
+	//Método para comprobar si existe la letra y sobrescribe la palabra secreta
+	
 	public boolean estaLetra(char letra) 
 	{
 		boolean letraEsta = false;
@@ -119,7 +137,9 @@ public class Ahorcado
 		
 		return letraEsta;
 	}
-
+	
+	//Método para comprobar si se ha resuelto la palabra
+	
 	public boolean palabraSecretaDesvelada() 
 	{
 		boolean guiones = true;
@@ -134,6 +154,8 @@ public class Ahorcado
 		return guiones;
 	}
 
+	//Método para intentar resolver la palabra
+	
 	public void intentoResolver(String showInputDialog) 
 	{
 		if(showInputDialog.equalsIgnoreCase(palabraSecreta))
@@ -149,10 +171,7 @@ public class Ahorcado
 		}
 	}
 
-	public String[] getImagenes() 
-	{
-		return imagenes.get((Integer)intentsMax);
-	}
+	//Método para que te proporcione una pista que será una letra de la palabra secreta
 
 	public void ejecutarPista(JButton[] array) 
 	{
@@ -189,9 +208,5 @@ public class Ahorcado
 				array[i].setEnabled(false);
 			} 
 		}
-	}
-
-	public Hashtable<String, ArrayList<String>> getPalabrasDoc() {
-		return palabrasDoc;
 	}
 }

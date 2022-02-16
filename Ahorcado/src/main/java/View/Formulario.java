@@ -18,12 +18,15 @@ import javax.swing.JRadioButton;
  */
 public class Formulario extends JFrame {
 	
+	//Atributos
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JRadioButton facil, normal, dificil;
 	private JComboBox<Object> comboBox;
 	private JButton btn;
 	
+	//Constructor
 
 	public Formulario() 
 	{
@@ -70,49 +73,41 @@ public class Formulario extends JFrame {
 		contentPane.add(btn);
 	}
 
+	//Getters y Setters
 
 	public JRadioButton getFacil() {
 		return facil;
 	}
 
-
 	public void setFacil(JRadioButton facil) {
 		this.facil = facil;
 	}
-
 
 	public JRadioButton getNormal() {
 		return normal;
 	}
 
-
 	public void setNormal(JRadioButton normal) {
 		this.normal = normal;
 	}
-
 
 	public JRadioButton getDificil() {
 		return dificil;
 	}
 
-
 	public void setDificil(JRadioButton dificil) {
 		this.dificil = dificil;
 	}
-
 
 	public JComboBox<Object> getComboBox() {
 		return comboBox;
 	}
 
-
 	public void setComboBox(JComboBox<Object> comboBox) {
 		this.comboBox = comboBox;
 	}
-
-
+	
 	public JButton getBtn() {
 		return btn;
 	}
-
 }
