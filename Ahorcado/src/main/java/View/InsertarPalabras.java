@@ -44,7 +44,7 @@ public class InsertarPalabras extends JFrame {
 		insertarDatos.setLayout(null);
 		
 		volver = new JButton("Volver");
-		volver.setBounds(350, 150, 89, 23);
+		volver.setBounds(400, 150, 85, 25);
 		insertarDatos.add(volver);
 	}
 	
@@ -57,7 +57,7 @@ public class InsertarPalabras extends JFrame {
 			
 			str = str.substring(0, str.length()-2);
 			
-			JLabel categ = new JLabel(categoria+":  "+str);
+			JLabel categ = new JLabel("<html><body style=\"width: 100%; text-align: center;\"><u><i>" + categoria + "</i></u><div style=\"width: 500px;\">" + str + "</div></body></html>");
 
 			panelLista.add(categ);
 		});
@@ -86,7 +86,7 @@ public class InsertarPalabras extends JFrame {
 					
 					str = str.substring(0, str.length()-2);
 					
-					JLabel categ = new JLabel(categoria+":  "+str);
+					JLabel categ = new JLabel("<html><body style=\"width: 100%; text-align: center;\"><u><i>" + categoria + "</i></u><div style=\"width: 500px;\">" + str + "</div></body></html>");
 
 					panelLista.add(categ);
 				});
@@ -102,12 +102,12 @@ public class InsertarPalabras extends JFrame {
 		
 		select.setModel(new DefaultComboBoxModel<Object>(categorys.toArray()));
 		
-		categ.setBounds(79, 53, 80, 14);
-		select.setBounds(170, 49, 120, 22);
-		texto.setBounds(320, 53, 120, 14);
+		categ.setBounds(80, 53, 80, 15);
+		select.setBounds(170, 49, 120, 20);
+		texto.setBounds(320, 53, 120, 15);
 		textField.setBounds(441, 50, 145, 20);
 		textField.setColumns(10);
-		addBtn.setBounds(203, 150, 89, 23);
+		addBtn.setBounds(250, 150, 85, 25);
 		
 		insertarDatos.add(categ);
 		insertarDatos.add(select);
