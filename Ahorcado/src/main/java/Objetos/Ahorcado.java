@@ -21,9 +21,12 @@ public class Ahorcado
 		setPalabras(opcion);
 		setPalabraSecreta();
 		setPalabraSecretaMostrar();
-		imagenes.put(10, new String[]{});
-		imagenes.put(8, new String[]{});
-		imagenes.put(6, new String[]{});
+		imagenes.put(10, new String[]{"../intento1.png", "../intento2.png", "../intento3.png", "../intento4.png", "../intento5.png",
+									  "../intento6.png", "../intento7.png", "../intento8.png", "../intento9.png", "../intento10.png"});
+		imagenes.put(8, new String[]{"../intento3.png", "../intento4.png", "../intento5.png", "../intento6.png",
+									 "../intento7.png", "../intento8.png", "../intento9.png", "../intento10.png"});
+		imagenes.put(6, new String[]{"../intento5.png", "../intento6.png", "../intento7.png",
+									 "../intento8.png", "../intento9.png", "../intento10.png"});
 	}
 
 	public int getContador() 
